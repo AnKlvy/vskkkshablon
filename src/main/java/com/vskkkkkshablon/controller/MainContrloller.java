@@ -25,6 +25,12 @@ public class MainContrloller {
     return "index";
   }
 
+  @GetMapping("/additem")
+  public String addItemForm()
+  {
+    return "additem";
+  }
+
   @PostMapping("/additem")
   public String addProduct(@RequestParam(name="name", defaultValue="No name" ) String name,
                            @RequestParam(name="price", defaultValue="0" ) int price,
@@ -43,6 +49,16 @@ public class MainContrloller {
 
     return "redirect:/";
 
+  }
+
+  @PostMapping("/deleteitem")
+  public String deleteItem(@RequestParam(name="id") Long id){
+
+    Products product = productService.getProduct(id);
+    if(product!=null){
+      productService.deleteProduct(product);
+    }
+    return "redirect:/";
   }
 
 }

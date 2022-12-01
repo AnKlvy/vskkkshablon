@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--    <div th:insert="layout/main.html :: head"></div>-->
+</head>
+<body>
+<!--<div th:insert="layout/main.html :: navbar"></div>-->
+<div class="row mt-5">
+    <div class="col-6 offset-3">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>AMOUNT</th>
+                <th>DESCRIPTION</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each = "it : ${tovary}">
+                <td th:text = "${it.getId()}"></td>
+                <td th:text = "${it.getName()}"></td>
+                <td th:text = "${it.getPrice()}"></td>
+                <td th:text = "${it.getAmount()}"></td>
+                <td th:text = "${it.getDescription()}"></td>
+                <td>
+                <form th:action="@{'/deleteitem/'}" method="post">
+                    <input type="hidden" name="id" th:value="${it.getId()}">
+                    <button>Delete</button>
+                </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:href="@{'/additem'}">Add Item</a>
+    </div>
+</div>
+</body>
+</html>
