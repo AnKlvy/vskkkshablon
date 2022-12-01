@@ -5,9 +5,9 @@ import com.vskkkkkshablon.entities.Products;
 import java.util.List;
 
 public interface ProductService {
-  Products addItem(Products items);
-  List<Products> getAllItems();
-  Products getItem(Long id);
-  void deleteItem(Products item);
-  Products saveItem(Products item);
+  Products addProduct(Products product);
+  List<Products> getAllProducts();
+  Products getProduct(Long id);
+  void deleteProduct(Products product);
+  Products saveProduct(Products product);
 }
