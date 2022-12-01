@@ -24,4 +24,25 @@ public class MainContrloller {
 
     return "index";
   }
+
+  @PostMapping("/additem")
+  public String addProduct(@RequestParam(name="name", defaultValue="No name" ) String name,
+                           @RequestParam(name="price", defaultValue="0" ) int price,
+                           @RequestParam(name="amount", defaultValue="0" ) int amount,
+                           @RequestParam(name="description", defaultValue="No description" ) String description) {
+
+
+      Products product = new Products();
+    product.setName(name);
+    product.setPrice(price);
+    product.setAmount(amount);
+    product.setDescription(description);
+
+      productService.addProduct(product);
+
+
+    return "redirect:/";
+
+  }
+
 }
