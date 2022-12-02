@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<!--    <div th:insert="layout/main.html :: head"></div>-->
+    <div th:insert="layout/main.html :: head"></div>
 </head>
 <body>
 <!--<div th:insert="layout/main.html :: navbar"></div>-->
@@ -21,18 +21,21 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each = "it : ${tovary}">
+           <tr th:each = "it : ${tovary}" >
+
                 <td th:text = "${it.getId()}"></td>
                 <td th:text = "${it.getName()}"></td>
                 <td th:text = "${it.getPrice()}"></td>
                 <td th:text = "${it.getAmount()}"></td>
                 <td th:text = "${it.getDescription()}"></td>
-                <td>
-                <form th:action="@{'/deleteitem/'}" method="post">
-                    <input type="hidden" name="id" th:value="${it.getId()}">
-                    <button>Delete</button>
-                </form>
-                </td>
+
+               <td>
+<!--                   <form th:action="@{'/deleteitem/'}" method="post">-->
+<!--                       <input type="hidden" name="id" th:value="${it.getId()}">-->
+<!--                       <button>Delete</button>-->
+<!--                   </form>-->
+                   <a th:href="@{'/details?id='+ ${it.getId()}}">Details</a>
+               </td>
             </tr>
             </tbody>
         </table>

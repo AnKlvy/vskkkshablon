@@ -22,7 +22,7 @@ public class MainContrloller {
     List<Products> products = productService.getAllProducts();
     model.addAttribute("tovary", products);
 
-    return "index";
+    return  "index";
   }
 
   @GetMapping("/additem")
