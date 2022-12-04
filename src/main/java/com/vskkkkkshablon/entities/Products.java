@@ -5,14 +5,12 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name="t_products")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Products {
@@ -34,16 +32,6 @@ public class Products {
   @Column(name = "amount")
   private int amount;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    Products products = (Products) o;
-    return id != null && Objects.equals(id, products.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return getClass().hashCode();
-  }
+  @ManyToMany(fetch = FetchType.EAGER)
+  private List<Categories> categories;
 }

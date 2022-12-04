@@ -1,5 +1,6 @@
 package com.vskkkkkshablon.controller;
 
+import com.vskkkkkshablon.entities.Categories;
 import com.vskkkkkshablon.entities.Products;
 import com.vskkkkkshablon.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,34 +18,38 @@ public class MainContrloller {
   private ProductService productService;
 
   @GetMapping("/")
-  public String index(Model model){
+  public String index(Model model) {
 
     List<Products> products = productService.getAllProducts();
     model.addAttribute("tovary", products);
 
-    return  "index";
+    return "index";
   }
 
   @GetMapping("/additem")
-  public String addItemForm()
-  {
+  public String addItemForm(Model model) {
+    List<Categories> categories =productService.getAllCategories();
+    model.addAttribute("categories", categories);
+
     return "additem";
   }
 
   @PostMapping("/additem")
-  public String addProduct(@RequestParam(name="name", defaultValue="No name" ) String name,
-                           @RequestParam(name="price", defaultValue="0" ) int price,
-                           @RequestParam(name="amount", defaultValue="0" ) int amount,
-                           @RequestParam(name="description", defaultValue="No description" ) String description) {
+  public String addProduct(@RequestParam(name="category_id") Long categories,
+                           @RequestParam(name = "name", defaultValue = "No name") String name,
+                           @RequestParam(name = "price", defaultValue = "0") int price,
+                           @RequestParam(name = "amount", defaultValue = "0") int amount,
+                           @RequestParam(name = "description", defaultValue = "No description") String description) {
 
 
-      Products product = new Products();
+    Products product = new Products();
     product.setName(name);
     product.setPrice(price);
     product.setAmount(amount);
     product.setDescription(description);
+    productService.addCategoriesToP(product,categories);
 
-      productService.addProduct(product);
+    productService.addProduct(product);
 
 
     return "redirect:/";
@@ -52,10 +57,10 @@ public class MainContrloller {
   }
 
   @PostMapping("/deleteitem")
-  public String deleteItem(@RequestParam(name="id") Long id){
+  public String deleteItem(@RequestParam(name = "id") Long id) {
 
     Products product = productService.getProduct(id);
-    if(product!=null){
+    if (product != null) {
       productService.deleteProduct(product);
     }
     return "redirect:/";

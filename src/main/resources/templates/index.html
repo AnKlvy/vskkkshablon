@@ -17,6 +17,7 @@
                 <th>PRICE</th>
                 <th>AMOUNT</th>
                 <th>DESCRIPTION</th>
+                <th>CATEGORIES</th>
                 <th></th>
             </tr>
             </thead>
@@ -28,7 +29,9 @@
                 <td th:text = "${it.getPrice()}"></td>
                 <td th:text = "${it.getAmount()}"></td>
                 <td th:text = "${it.getDescription()}"></td>
-
+               <td>
+                   <span th:each="cat : ${it.categories}" th:text="${cat.name}" style="display: block;"></span>
+               </td>
                <td>
 <!--                   <form th:action="@{'/deleteitem/'}" method="post">-->
 <!--                       <input type="hidden" name="id" th:value="${it.getId()}">-->
