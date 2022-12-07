@@ -66,4 +66,9 @@ public class MainContrloller {
     return "redirect:/";
   }
 
+ @GetMapping("/403")
+  public String accessDenied(Model model){
+    return "403";
+ }
+
 }

@@ -16,8 +16,8 @@ public class ProductServiceImpl implements ProductService {
 
   @Autowired
   private ProductRepository productRepository;
-@Autowired
-private CategoryRepository categoryRepository;
+  @Autowired
+  private CategoryRepository categoryRepository;
 
   @Override
   public Products addProduct(Products product) {
@@ -31,7 +31,7 @@ private CategoryRepository categoryRepository;
 
   @Override
   public Products getProduct(Long id) {
-    return productRepository.findByIdAndAmountGreaterThan(id,0);
+    return productRepository.findByIdAndAmountGreaterThan(id, 0);
   }
 
   @Override
@@ -44,22 +44,22 @@ private CategoryRepository categoryRepository;
     return productRepository.save(product);
   }
 
-
-
   @Override
   public Products addCategoriesToP(Products s, Long c) {
     List<Categories> cates = new ArrayList<>();
 
-    Categories category=categoryRepository.findById(c).get();
+    Categories category = categoryRepository.findById(c).get();
     cates.add(category);
     s.setCategories(cates);
 
     return s;
   }
 
+
   @Override
   public List<Categories> getAllCategories() {
-    return categoryRepository.findAll();  }
+    return categoryRepository.findAll();
+  }
 
 
 }
