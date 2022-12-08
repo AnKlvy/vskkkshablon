@@ -21,31 +21,42 @@
 <!--    <a  th:href="@{'/'}"><img style="width:400px" th:src="@{/images/logo2x.png}" alt="a"></a>-->
 <!--    </div>-->
 <!--    </div>-->
-    <div class="header">
-
-        <div class="header-logo col-lg-4 col-sm-3 col-xsp-5 col-xsl-4 col-xsl-offset-1 col-sm-offset-0 nopadlr">
+    <div class="container">
+        <div class="row align-items-center">
+        <div class="header-logo col">
             <a  th:href="@{'/'}"><img style="width:400px" th:src="@{/images/logo2x.png}" alt="a"></a>
+        </div>
 
 
+<!--        <div class="col-sm-5 col-lg-6 nopadlr header-promos">-->
 
-        <div class="col-sm-5 col-lg-6 nopadlr header-promos">
-            <div class="row align-items-center">
-            <div class="col-sm-4 visible-from-sm header-promo">
+            <div class="col-sm-2">
                 <p>
                     <strong>Ready to ship</strong>
                     <br>55.000 Products</p>
             </div>
-            <div class="col-sm-4 visible-from-sm header-promo">
+            <div class="col-sm-2">
                 <p>
                     <strong>55.000 products</strong>
                     <br>ready for shipment</p>
             </div>
-            <div class="col-sm-4 visible-from-sm header-promo">
+            <div class="col-sm-2">
                 <p>
                     <strong>Money Back</strong>
                     <br>30 Day Return Policy</p>
             </div>
+
+            <div class="col-sm-2" sec:authorize="isAnonymous()">
+                <a th:href="@{'/login'}" th:text="Login" class="link-dark"></a>
             </div>
+
+            <div class="col-sm-2" sec:authorize="isAuthenticated()">
+                <a onclick="document.getElementById('logoutFormId').submit()" th:href="@{'/logout'}" th:text="Logout" class="link-dark"></a>
+            </div>
+
+            <form th:action="@{'/logout'}" method="post" id="logoutFormId" sec:authorize="isAuthenticated()"></form>
+<!--            </div>-->
+
         </div>
 
 </div>
@@ -59,9 +70,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" aria-current="page" th:href="@{'/additem'}">Add Item</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                    <li class="m-0">
+                        <a class="btn btn-outline-light border border-0" aria-current="page" th:href="@{'/additem'}">Add Item</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{'/additem'}">Add Item</a>

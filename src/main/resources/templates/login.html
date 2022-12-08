@@ -6,22 +6,30 @@
 </head>
 <body>
 <div th:insert="layout/main.html :: navbar"></div>
-<div class="row mt-5">
-    <div class="col-6 offset-3">
-<form th:action="@{'/auth'}" method="post">
-    <div class="form-group">
-        <label>EMAIL: </label>
-        <input type="email" name="user_email" class="form-control" required>
+<div class="container">
+    <div class="col-9">
+        <div class="col-xsp-12 nopadlr">
+            <div class="col-md-6 nopad">
+                <br>
+                <h1>MUSIC STORE-Login</h1>
+                <p>Login for direct access to your user account or create your own account to enjoy numerous
+                    advantages.</p></div>
+        </div>
     </div>
-    <div class="form-group">
-        <label>PASSWORD: </label>
-        <input type="password" name="user_password" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-success float-right">SIGN IN</button>
-    </div>
-</form>
-    </div>
+    <form th:action="@{'/auth'}" method="post">
+        <div class="form-group">
+            <label>EMAIL: </label>
+            <input type="email" name="user_email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>PASSWORD: </label>
+            <input type="password" name="user_password" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success float-right">SIGN IN</button>
+        </div>
+    </form>
 </div>
+
 </body>
 </html>
