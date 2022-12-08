@@ -6,10 +6,341 @@
 </head>
 <body>
 <div th:insert="layout/main.html :: navbar"></div>
-<div class="row mt-5">
-    <div class="col-12">
-      <h1 class="display-1 text-center">WELCOME <span th:text="${currentUser.fullName}"></span></h1>
+<!--<div class="row mt-5">-->
+<!--    <div class="col-12">-->
+<!--      <h1 class="display-1 text-center">WELCOME <span th:text="${currentUser.fullName}"></span></h1>-->
+<!--    </div>-->
+<div class="col-md-9 col-lg-9 col-lg-push-1 col-xlg-8 md-6">
+    <div class="row">
+        <div class="col-md-6 nopad">
+            <h1>Welcome andreyklimov.ver2@gmail.com!</h1>
+            <p>Here you will find everything to follow your orders, update your address book, edit your contact information and more.</p>
+        </div>
+    </div><div class="marketingArea"></div><h3>My last order</h3>You have not placed any orders at Music Store before.
+    <br><br>
+    <div class="hidden-print">
+
+        <h3>My last return</h3>You have not made any returns.<br><br><div>
+        <div class="row margb20">
+            <h3>My personal data<a class="noborder" href="https://www.musicstore.com/INTERSHOP/web/WFS/MusicStore-MusicStoreShop-Site/en_US/ms-oe/EUR/ViewProfileSettings-ViewProfilePreferences">
+                <i class="icon icon-pencil"></i>
+            </a>
+            </h3><div class="col-xsp-5 col-lg-3 nopadl email-data">E-Mail:</div>
+            <div class="col-xsp-7 col-lg-9 nopadr email-data">
+                <span>andreyklimov.ver2@gmail.com</span>
+                <a class="noborder margl10" href="https://www.musicstore.com/INTERSHOP/web/WFS/MusicStore-MusicStoreShop-Site/en_US/ms-oe/EUR/ViewProfileSettings-ViewLoginSettings" title="Edit"><i class="icon icon-pencil"></i></a>
+            </div></div>
+        <div class="hidden-print">
+            <div id="socialpasswordModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-header scratched-head-lr">
+                        <span class="close overlay-close btn btn-ms-std btn-lg" data-dismiss="modal" title="Close"><i class="icon icon-close"></i></span>
+                        <span class="h2 modal-title">Disconnect</span>
+                    </div><form method="POST" id="facebookDisconnectForm" action="https://www.musicstore.com/INTERSHOP/web/WFS/MusicStore-MusicStoreShop-Site/en_US/ms-oe/EUR/ViewSocialLogin-Disconnect"><input type="hidden" name="SynchronizerToken" value="2d912eba0db8eb4c2beef6e3225033db6baecc3d46deb3b48ba6daba529ea6d4"><div class="modal-content">
+                    <div class="row">
+                        <div class="col-md-12 nopad ">
+                            <p>To disconnect from your social media account you need to provide a password to your MUSICSTORE-Account.</p>
+                            <div class="field"><div role="alert" data-name="Error" data-connection="" class="kor-field-error-message-placeholder"></div><label for="SocialPassword"><span>Password<span class="ms-star">*</span></span></label>
+                                <input class="form-control input-lg" autocomplete="off" aria-required="true" data-validate="passwordrequired securepassword passwordrange(6,null)" type="password" id="SocialPassword" name="SocialPassword" data-id="password">
+                                <span class="smaller grey pull-right">Minimum 6 characters must contain letters as well as numbers, no spaces allowed</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-ms-std margr10 w100p w100p-xsl margb10 input-lg" type="submit" value="Login" name="login" data-id="butt-login">Set password and disconnect<i class="icon icon-caret-right"></i></button>
+                    </div>
+                </div></form></div>
+            </div>
+            <div id="socialpasswordAmazonModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-header scratched-head-lr">
+                        <span class="close overlay-close btn btn-ms-std btn-lg" data-dismiss="modal" title="Close"><i class="icon icon-close"></i></span>
+                        <span class="h2 modal-title">Disconnect</span>
+                    </div><form method="POST" id="amazonDisconnectForm" action="https://www.musicstore.com/INTERSHOP/web/WFS/MusicStore-MusicStoreShop-Site/en_US/ms-oe/EUR/ViewSocialLogin-Disconnect"><input type="hidden" name="SynchronizerToken" value="2d912eba0db8eb4c2beef6e3225033db6baecc3d46deb3b48ba6daba529ea6d4"><input type="hidden" name="amazonDisconnect" value="true">
+                    <div class="modal-content">
+                        <div class="row">
+                            <div class="col-md-12 nopad ">
+                                <p>To disconnect from your social media account you need to provide a password to your MUSICSTORE-Account.</p>
+                                <div class="field"><div role="alert" data-name="Error" data-connection="" class="kor-field-error-message-placeholder"></div><label for="SocialPassword"><span>Password<span class="ms-star">*</span></span></label>
+                                    <input class="form-control input-lg" autocomplete="off" aria-required="true" data-validate="passwordrequired securepassword passwordrange(6,null)" type="password" id="SocialPassword" name="SocialPassword" data-id="password">
+                                    <span class="smaller grey pull-right">Minimum 6 characters must contain letters as well as numbers, no spaces allowed</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-ms-std margr10 w100p w100p-xsl margb10 input-lg" onclick="amazon.Login.logout();" type="submit" value="Login" name="login" data-id="butt-login">Set password and disconnect<i class="icon icon-caret-right"></i></button>
+                        </div>
+                    </div></form></div>
+            </div><h5>Social Connections</h5>
+            <div class="row">
+                <div class="col-xlg-4 col-lg-6 col-sm-7 nopad">
+                    <a id="login_fb_btn" title="Connect with Facebook" class="w100p btn btn-lg btn-ms-facebook truncate" href="javascript:void(0)" onclick="FBConnect();"><i class="icon icon-facebook"></i>Connect with Facebook</a><form method="POST" id="facebookConnectForm" action="https://www.musicstore.com/INTERSHOP/web/WFS/MusicStore-MusicStoreShop-Site/en_US/ms-oe/EUR/ViewSocialLogin-ConnectFacebookAccount"><input type="hidden" name="SynchronizerToken" value="2d912eba0db8eb4c2beef6e3225033db6baecc3d46deb3b48ba6daba529ea6d4"><input type="hidden" id="facebookLogin_AccessToken" name="facebookAccessToken">
+                    <input type="hidden" id="facebookLogin_UserID" name="facebookUserID">
+                    <input type="hidden" id="facebookLogin_Email" name="facebookEmail"></form><a id="login_tw_btn" title="Connect with Twitter" class="w100p btn btn-lg btn-ms-twitter truncate" href="javascript:void(0)" onclick="$('#twitterConnectStart').submit()"><i class="icon icon-twitter"></i>Connect with Twitter</a><form method="POST" id="twitterConnectStart" action="https://www.musicstore.com/INTERSHOP/web/WFS/MusicStore-MusicStoreShop-Site/en_US/ms-oe/EUR/ViewSocialLogin-TwitterLoginStart"><input type="hidden" name="SynchronizerToken" value="2d912eba0db8eb4c2beef6e3225033db6baecc3d46deb3b48ba6daba529ea6d4"></form><a id="login_az_btn" title="Connect with Amazon" href="javascript:void(0)" onclick="$('#ConnectWithAmazon img').trigger('click');" class="w100p btn btn-lg btn-ms-amazon truncate">
+                    <i class="icon icon-amazon"></i>Connect with Amazon</a>
+                    <a id="ConnectWithAmazon" class="payment-amazon-button" style="display: none;"><img class=" amazonpay-button-inner-image" style="cursor:pointer; max-height:46px;" alt="AmazonPay" id="OffAmazonPaymentsWidgets0" src="https://d23yuld0pofhhw.cloudfront.net/default/de/en_GB/live/lwa/gold/medium/A.png" tabindex="0"></a>
+                    <script type="text/javascript">
+                        window.onAmazonLoginReady = function() {
+                            amazon.Login.setClientId("amzn1.application-oa2-client.04ebf2ae29d64d7e8d2d0f38b2a7d658");
+                            var authRequest;
+                            var popup = true;
+                            OffAmazonPayments.Button("ConnectWithAmazon","AYUJI2IM0YSUK", {
+                                type: "A",
+                                authorization: function() {
+                                    loginOptions = {
+                                        scope: "profile payments:widget payments:shipping_address payments:billing_address", popup: popup};
+                                    authRequest = amazon.Login.authorize (loginOptions,
+                                        "https://www.musicstore.com/INTERSHOP/web/WFS/MusicStore-MusicStoreShop-Site/en_US/ms-oe/EUR/ViewSocialLogin-AmazonLogin");
+                                },
+                                onError: function(error) {
+                                }
+                            });
+                        };
+                    </script><script type="text/javascript">
+                    function isFileLoaded(file) {
+                        var length = loadedFiles.length;
+                        for(var i = 0; i < length; i++) {
+                            if(loadedFiles[i] == file) return true;
+                        }
+                        return false;
+                    }
+                    //define array that holds loaded js files
+                    if(typeof loadedFiles === 'undefined'){
+                        var loadedFiles = [];
+                    }
+                    function includeOnce(file){
+                        if(!isFileLoaded(file)){
+                            (function defer() {
+                                if (window.jQuery) {
+//function to include js only once
+                                    $.getScript(file);
+                                } else {
+                                    setTimeout(function() { defer() }, 50);
+                                }
+                            })();
+                            loadedFiles.push(file);
+                        }
+                    }
+                    includeOnce("https://static-eu.payments-amazon.com/OffAmazonPayments/de/lpa/js/Widgets.js");
+                </script></div>
+            </div>
+            <script type="text/javascript">
+                function CreateCheckOutCookie(){
+                    var d = new Date();
+                    d.setTime(d.getTime() + (5 * 60 * 1000));
+                    var expires = "expires="+d.toUTCString();
+                    document.cookie="incheckout=true; path=/; " + expires;
+                }
+                function DeleteCheckOutCookie(){
+                    document.cookie="incheckout=true; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                }
+            </script>
+            <script type="text/javascript">
+                window.fbAsyncInit = function() {
+                    FB.init({
+                        appId : '418123285057610',
+                        xfbml : true,
+                        version : 'v3.2'
+                    });
+                };
+                (function(d, s, id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) {return;}
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/all.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+                function FBConnect() {
+                    FB.getLoginStatus(function(response) {
+                        if (response.status === 'connected') {
+                            fbUserId = response.authResponse.userID;
+                            token = response.authResponse.accessToken;
+                            $("#facebookLogin_UserID").val(fbUserId);
+                            $("#facebookLogin_AccessToken").val(token);
+                            FBFillInformations();
+                        }
+                        else {
+                            FB.login(function(loginresponse){
+                                if (loginresponse.authResponse) {
+                                    fbUserId = loginresponse.authResponse.userID;
+                                    token = loginresponse.authResponse.accessToken;
+                                    $("#facebookLogin_UserID").val(fbUserId);
+                                    $("#facebookLogin_AccessToken").val(token);
+                                    console.log(loginresponse);
+                                    FBFillInformations();
+                                }
+                                else{
+                                    console.log("User cancelled login");
+                                }
+                            },{scope: 'public_profile,email'});
+                        }
+                    });
+                }
+                function FBFillInformations() {
+                    FB.api('/me', {fields: 'last_name,first_name,email'}, function(response) {
+                        $("#facebookLogin_Email").val(response.email);
+                        FBConnectStart();
+                    });
+                }
+                function FBConnectStart(){
+                    if($("#facebookLogin_UserID").val() != "" && $("#facebookLogin_AccessToken").val() != ""){
+                        $("#facebookConnectForm").submit();
+                    }
+                };
+            </script>
+            <script src="https://apis.google.com/js/plus.js" gapi_processed="true"></script>
+            <script src="https://apis.google.com/js/client:plus.js" gapi_processed="true"></script>
+            <script src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script>
+            <script type="text/javascript">
+                var GoogleOptions = {
+                    'clientid': '',
+                    'cookiepolicy': 'single_host_origin',
+                    'requestvisibleactions': 'http://schema.org/AddAction',
+                    'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+                    'callback': 'GLoginFinishedCallback'
+                }
+                function GConnect() {
+                    gapi.auth.signIn(GoogleOptions);
+                }
+                function GLoginFinishedCallback(authResult) {
+                    if (authResult['status']['signed_in']) {
+//console.log(authResult);
+                        if (authResult['status']['method'] == 'PROMPT'){
+                            gapi.auth.setToken(authResult);
+                            $("#googleLogin_AccessToken").val(authResult['access_token']);
+                            GoogleRequestUserData();
+                        } else {
+                            console.log('An error occurred');
+                        }
+                    } else {
+                        console.log('Empty authResult');
+                    }
+                }
+                function GoogleRequestUserData(){
+                    gapi.client.load('oauth2', 'v2', function() {
+                        var request = gapi.client.oauth2.userinfo.get();
+                        request.execute(GoogleUserDataCallBack);
+                    });
+                }
+                function GoogleUserDataCallBack(obj){
+                    if (obj) {
+                        $("#googleLogin_Email").val(obj['email']);
+                        $("#googleLogin_UserID").val(obj['id']);
+//console.log(obj);
+                        GoogleConnectStart();
+                    } else {
+                        console.log("user blocked access");
+                    }
+                }
+                function GoogleConnectStart(){
+                    if($("#googleLogin_Email").val() != "" && $("#googleLogin_UserID").val() != "" && $("#googleLogin_AccessToken").val() != ""){
+//alert("submit google login form");
+                        $("#googleConnectForm").submit();
+                    }
+                }
+            </script><div class="row">
+            <div class="col-xsp-12 nopad">
+                <style>
+                    .fb-like {
+                        left: -5px;
+                    }
+                    #twitter-widget-0 {
+                        position: relative !important;
+                        display: inline-block;
+                    }
+                    @media (max-width: 399px) {
+                        #twitter-widget-0 {
+                            top: -3px;
+                            left: 0px;
+                            display: block;
+                        }
+                    }
+                    @media (min-width: 400px) and (max-width: 419px) {
+                        #twitter-widget-0 {
+                            top: -7px;
+                            left: -6px;
+                        }
+                    }
+                    @media (min-width: 420px) {
+                        #twitter-widget-0 {
+                            top: -7px;
+                            left: -6px;
+                        }
+                    }
+                </style>
+                <h5>Social Sharings</h5>
+                <div class="fb-like fb_iframe_widget" data-href="https://www.facebook.com/MusicStoreKoeln/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=418123285057610&amp;container_width=481&amp;href=https%3A%2F%2Fwww.facebook.com%2FMusicStoreKoeln%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true"><span style="vertical-align: bottom; width: 150px; height: 28px;"><iframe name="f2415e6ea8c7d48" width="1000px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/plugins/like.php?action=like&amp;app_id=418123285057610&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df3aa7e4308e7f84%26domain%3Dwww.musicstore.com%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fwww.musicstore.com%252Ffb1667d9a727cc%26relation%3Dparent.parent&amp;container_width=481&amp;href=https%3A%2F%2Fwww.facebook.com%2FMusicStoreKoeln%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true" style="border: none; visibility: visible; width: 150px; height: 28px;" class=""></iframe></span></div>
+                <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-follow-button twitter-follow-button-rendered" style="position: static; visibility: visible; width: 180px; height: 20px;" title="Twitter Follow Button" src="https://platform.twitter.com/widgets/follow_button.644279d1635fd969e87af94a98bd232b.de.html#dnt=false&amp;id=twitter-widget-0&amp;lang=de&amp;screen_name=musicstore_de&amp;show_count=true&amp;show_screen_name=false&amp;size=m&amp;time=1670533548825" data-screen-name="musicstore_de"></iframe>
+                <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div>
+                <script type="text/javascript">
+                    (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v2.0";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                </script>
+                <script type="text/javascript">
+                    window.twttr=(function(d,s,id){
+                        var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};
+                        if(d.getElementById(id))return;js=d.createElement(s);
+                        js.id=id;
+                        js.src="https://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js,fjs);
+                        t._e=[];
+                        t.ready=function(f){
+                            t._e.push(f);
+                        };
+                        return t;
+                    }(document,"script","twitter-wjs"));
+                </script>
+            </div>
+        </div></div>
+    </div><br><br><div>
+        <div class="row"><div class="col-md-12 nopad">
+            <h3>My Standard delivery and billing address<a class="noborder" href="https://www.musicstore.com/INTERSHOP/web/WFS/MusicStore-MusicStoreShop-Site/en_US/ms-oe/EUR/ViewUserAddressList-List">
+                <i class="icon icon-pencil"></i>
+            </a>
+            </h3><div class="address-name"> <br></div>
+            <div class="address-street">
+
+
+            </div>
+
+
+            <span class="address-city"></span><br><span class="address-country
+"><br>
+</span></div></div>
+    </div><br><br><h3>My wish list</h3>
+        <div class="row">You have no items on your wish list.</div>
+        <div class="visible-xsp visible-xsl visible-sm visible-md">
+            <p></p><form method="post" id="LogoutForm" action="https://www.musicstore.com/en_OE/EUR/logout"><input type="hidden" name="SynchronizerToken" value="2d912eba0db8eb4c2beef6e3225033db6baecc3d46deb3b48ba6daba529ea6d4"><input type="hidden" name="RedirectURL" value=""><script type="text/javascript">
+            function isFileLoaded(file) {
+                var length = loadedFiles.length;
+                for(var i = 0; i < length; i++) {
+                    if(loadedFiles[i] == file) return true;
+                }
+                return false;
+            }
+            //define array that holds loaded js files
+            if(typeof loadedFiles === 'undefined'){
+                var loadedFiles = [];
+            }
+            function includeOnce(file){
+                if(!isFileLoaded(file)){
+                    (function defer() {
+                        if (window.jQuery) {
+//function to include js only once
+                            $.getScript(file);
+                        } else {
+                            setTimeout(function() { defer() }, 50);
+                        }
+                    })();
+                    loadedFiles.push(file);
+                }
+            }
+            includeOnce("https://static-eu.payments-amazon.com/OffAmazonPayments/de/lpa/js/Widgets.js");
+        </script><button type="submit" class="noborder js-add-redirecturl mobile-logout mobile-logout-account" onclick="amazon.Login.logout();"><i class="icon icon-close"></i>Logout</button></form><p></p>
+        </div>
     </div>
+</div>
 </div>
 </body>
 </html>

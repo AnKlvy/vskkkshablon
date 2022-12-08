@@ -38,7 +38,59 @@ public class MainContrloller {
     return "index";
   }
 
+  @GetMapping("/products")
+  public String products(Model model) {
+
+    model.addAttribute("currentUser", getUserData());
+
+    List<Products> products = productService.getAllProducts();
+    model.addAttribute("tovary", products);
+
+    return "products";
+  }
+
+  @GetMapping(value = "/details")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
+  public String details(Model model, @RequestParam(name = "id") Long id) {
+
+    Products item = productService.getProduct(id);
+    model.addAttribute("item", item);
+
+//
+    List<Categories> categories2 = productService.getAllCategories();
+    model.addAttribute("categories", categories2);
+
+    return "details";
+  }
+
+  @PostMapping("/saveitem")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
+  public String save(@RequestParam(name="category_id") Long categories,
+                     @RequestParam(name = "id", defaultValue = "0") Long id,
+                           @RequestParam(name = "name", defaultValue = "No name") String name,
+                           @RequestParam(name = "price", defaultValue = "0") int price,
+                           @RequestParam(name = "amount", defaultValue = "0") int amount,
+                           @RequestParam(name = "description", defaultValue = "No description") String description) {
+
+    Products product = productService.getProduct(id);
+
+    if (product != null) {
+
+//
+      product.setName(name);
+      product.setPrice(price);
+      product.setAmount(amount);
+      product.setDescription(description);
+//
+      productService.saveProduct(product);
+//
+    }
+    return "redirect:/";
+
+  }
+
   @GetMapping("/additem")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
   public String addItemForm(Model model) {
     model.addAttribute("currentUser", getUserData());
 
@@ -49,6 +101,7 @@ public class MainContrloller {
   }
 
   @PostMapping("/additem")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
   public String addProduct(@RequestParam(name="category_id") Long categories,
                            @RequestParam(name = "name", defaultValue = "No name") String name,
                            @RequestParam(name = "price", defaultValue = "0") int price,
@@ -71,6 +124,7 @@ public class MainContrloller {
   }
 
   @PostMapping("/deleteitem")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
   public String deleteItem(@RequestParam(name = "id") Long id) {
 
     Products product = productService.getProduct(id);

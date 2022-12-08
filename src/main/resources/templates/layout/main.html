@@ -51,6 +51,10 @@
             </div>
 
             <div class="col-sm-2" sec:authorize="isAuthenticated()">
+                <a th:href="@{'/profile'}" class="link-dark">My account</a>
+            </div>
+
+            <div class="col-sm-2" sec:authorize="isAuthenticated()">
                 <a onclick="document.getElementById('logoutFormId').submit()" th:href="@{'/logout'}" th:text="Logout" class="link-dark"></a>
             </div>
 
@@ -72,7 +76,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                     <li class="m-0">
-                        <a class="btn btn-outline-light border border-0" aria-current="page" th:href="@{'/additem'}">Add Item</a>
+                        <a class="btn btn-outline-light border border-0" aria-current="page" th:href="@{'/additem'}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')">Add Item</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{'/additem'}">Add Item</a>
