@@ -2,8 +2,15 @@ package com.vskkkkkshablon.controller;
 
 import com.vskkkkkshablon.entities.Categories;
 import com.vskkkkkshablon.entities.Products;
+import com.vskkkkkshablon.entities.Users;
 import com.vskkkkkshablon.service.ProductService;
+import com.vskkkkkshablon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +24,13 @@ public class MainContrloller {
   @Autowired
   private ProductService productService;
 
+  @Autowired
+  private UserService userService;
+
   @GetMapping("/")
   public String index(Model model) {
+
+    model.addAttribute("currentUser", getUserData());
 
     List<Products> products = productService.getAllProducts();
     model.addAttribute("tovary", products);
@@ -28,6 +40,8 @@ public class MainContrloller {
 
   @GetMapping("/additem")
   public String addItemForm(Model model) {
+    model.addAttribute("currentUser", getUserData());
+
     List<Categories> categories =productService.getAllCategories();
     model.addAttribute("categories", categories);
 
@@ -68,7 +82,31 @@ public class MainContrloller {
 
  @GetMapping("/403")
   public String accessDenied(Model model){
+   model.addAttribute("currentUser", getUserData());
     return "403";
+ }
+
+ @GetMapping("/login")
+  public String login(Model model){
+   model.addAttribute("currentUser", getUserData());
+    return "login";
+ }
+
+ @GetMapping("/profile")
+  @PreAuthorize("isAuthenticated()")
+  public String profile(Model model){
+    model.addAttribute("currentUser", getUserData());
+    return "profile";
+ }
+
+ private Users getUserData(){
+   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+   if(!(authentication instanceof AnonymousAuthenticationToken)){
+     User secUser = (User)authentication.getPrincipal();
+     Users myUser = userService.getUserByEmail(secUser.getUsername());
+     return myUser;
+   }
+   return null;
  }
 
 }
