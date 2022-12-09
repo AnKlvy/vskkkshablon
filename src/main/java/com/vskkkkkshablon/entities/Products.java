@@ -1,15 +1,20 @@
 package com.vskkkkkshablon.entities;
 
-
-import lombok.*;
-import org.hibernate.Hibernate;
-
-import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="t_products")
+@Table(name = "t_products")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +28,7 @@ public class Products {
   @Column(name = "name", length = 200)
   private String name;
 
-  @Column(name="price")
+  @Column(name = "price")
   private int price;
 
   @Column(name = "description", length = 1000)
