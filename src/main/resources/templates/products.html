@@ -7,14 +7,16 @@
 </head>
 <body>
 <div th:insert="layout/main.html :: navbar"></div>
-<div class="row mt-5">
-    <div class="col-6 offset-3">
-        <div class="card" style="width: 12rem; height: 20rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card with stretched link</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+<div class=" mt-5">
+    <div class="offset-3 ">
+        <div class="container gx-5 row">
+            <div class="card" th:each="item:${tovary}" style="width: 14rem; height: 26rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${item.name}"></h5>
+                    <strong><p class="card-text text-danger d-flex justify-content-end" th:text="'€'+${item.price}"></p></strong>
+                    <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+                </div>
             </div>
         </div>
     </div>

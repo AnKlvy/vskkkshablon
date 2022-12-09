@@ -38,13 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
         .exceptionHandling().accessDeniedPage("/403")
         .and()
-        .csrf().disable()
+//        .csrf().disable()
         .authorizeRequests()
-        .antMatchers("/","/css/**",
+        .antMatchers("/", "/register", "/css/**",
             "/js/**",
             "/fonts/**",
-            "/images/**"/*,
-            "/img/**"*/).permitAll()
+            "/images/**").permitAll()
 
         .antMatchers("/details").hasAnyRole("ADMIN","USER")
         .antMatchers(HttpMethod.POST,"/saveitem", "/deleteitem","/additem").hasRole("ADMIN")

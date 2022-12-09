@@ -46,15 +46,18 @@
                     <br>30 Day Return Policy</p>
             </div>
 
-            <div class="col-sm-2" sec:authorize="isAnonymous()">
+            <div class="col-sm-1" sec:authorize="isAnonymous()">
                 <a th:href="@{'/login'}" th:text="Login" class="link-dark"></a>
             </div>
+            <div class="col-sm-1" sec:authorize="isAnonymous()">
+                <a th:href="@{'/register'}" th:text="Register" class="link-dark"></a>
+            </div>
 
-            <div class="col-sm-2" sec:authorize="isAuthenticated()">
+            <div class="col-sm-1" sec:authorize="isAuthenticated()">
                 <a th:href="@{'/profile'}" class="link-dark">My account</a>
             </div>
 
-            <div class="col-sm-2" sec:authorize="isAuthenticated()">
+            <div class="col-sm-1" sec:authorize="isAuthenticated()">
                 <a onclick="document.getElementById('logoutFormId').submit()" th:href="@{'/logout'}" th:text="Logout" class="link-dark"></a>
             </div>
 
@@ -76,16 +79,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                     <li class="m-0">
-                        <a class="btn btn-outline-light border border-0" aria-current="page" th:href="@{'/additem'}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')">Add Item</a>
+                        <a class="btn btn-outline-light border border-0" aria-current="page" th:href="@{'/additem'}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')" >Add Item</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{'/additem'}">Add Item</a>
-                    </li>
+                  <li th:each="cat:${categories}">
+                    <input hidden th:value="${cat.id}">
+                      <a class="btn btn-outline-light border border-0" aria-current="page" th:href="@{'/products?id='+${cat.getId()}}" th:text="${cat.name}"></a>
+                  </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+<!--                <form class="d-flex">-->
+<!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--                </form>-->
             </div>
         </div>
     </nav>

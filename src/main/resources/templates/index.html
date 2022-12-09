@@ -76,7 +76,8 @@
 <!--                       <input type="hidden" name="id" th:value="${it.getId()}">-->
 <!--                       <button>Delete</button>-->
 <!--                   </form>-->
-                   <a th:href="@{'/details?id='+ ${it.getId()}}">Details</a>
+                   <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')" th:href="@{'/details?id='+ ${it.getId()}}">Edit</a>
+                   <a  th:href="@{'/details2?id='+ ${it.getId()}}">Details</a>
                </td>
             </tr>
             </tbody>

@@ -1,6 +1,7 @@
 package com.vskkkkkshablon.repositories;
 
 
+import com.vskkkkkshablon.entities.Categories;
 import com.vskkkkkshablon.entities.Products;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Products, Long> {
   List<Products> findAllByAmountGreaterThanOrderByPriceDesc(int amount);
   Products findByIdAndAmountGreaterThan(Long id, int amount);
+//  Products findAllByCategories(List<Categories> categories);
 }

@@ -35,6 +35,9 @@ public class MainContrloller {
     List<Products> products = productService.getAllProducts();
     model.addAttribute("tovary", products);
 
+    List<Categories> categories = productService.getAllCategories();
+    model.addAttribute("categories", categories);
+
     return "index";
   }
 
@@ -51,16 +54,32 @@ public class MainContrloller {
 
   @GetMapping(value = "/details")
   @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
-  public String details(Model model, @RequestParam(name = "id") Long id) {
+  public String edit(Model model, @RequestParam(name = "id") Long id) {
+    model.addAttribute("currentUser", getUserData());
 
     Products item = productService.getProduct(id);
     model.addAttribute("item", item);
 
 //
     List<Categories> categories2 = productService.getAllCategories();
-    model.addAttribute("categories", categories2);
+    model.addAttribute("categories2", categories2);
 
     return "details";
+  }
+
+  @GetMapping(value = "/details2")
+
+  public String details(Model model, @RequestParam(name = "id") Long id) {
+    model.addAttribute("currentUser", getUserData());
+
+    Products item = productService.getProduct(id);
+    model.addAttribute("item", item);
+
+//
+    List<Categories> categories2 = productService.getAllCategories();
+    model.addAttribute("categories2", categories2);
+
+    return "details2";
   }
 
   @PostMapping("/saveitem")
@@ -81,6 +100,7 @@ public class MainContrloller {
       product.setPrice(price);
       product.setAmount(amount);
       product.setDescription(description);
+      productService.addCategoriesToP(product,categories);
 //
       productService.saveProduct(product);
 //
@@ -145,6 +165,33 @@ public class MainContrloller {
    model.addAttribute("currentUser", getUserData());
     return "login";
  }
+
+  @GetMapping("/register")
+  public String register(Model model){
+    model.addAttribute("currentUser", getUserData());
+
+    return "register";
+  }
+
+  @PostMapping(value = "/register")
+  public String toRegister(@RequestParam(name = "user_full_name") String name,
+                           @RequestParam(name = "user_email") String email,
+                           @RequestParam(name = "user_password") String password,
+                           @RequestParam(name = "re_user_password") String rePassword){
+    if(password.equals(rePassword)){
+      Users newUser= new Users();
+      newUser.setFullName(name);
+      newUser.setPassword(password);
+      newUser.setEmail(email);
+
+      if(userService.createUser(newUser)!=null){
+        return "redirect:/register?success";
+      }
+
+    }
+    return "redirect:/register?error";
+  }
+
 
  @GetMapping("/profile")
   @PreAuthorize("isAuthenticated()")
