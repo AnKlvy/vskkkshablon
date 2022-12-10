@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 <head>
     <div th:insert="layout/main.html :: head"></div>
 </head>
 <body>
 <div th:insert="layout/main.html :: navbar"></div>
 <div class="container">
+    <div class="row">
+        <div class="col">
     <div class="col-9">
         <div class="col-xsp-12 nopadlr">
             <div class="col-md-6 nopad">
@@ -15,21 +17,40 @@
                 <p>Login for direct access to your user account or create your own account to enjoy numerous
                     advantages.</p></div>
         </div>
+        <form th:action="@{'/auth'}" method="post">
+            <div class="form-group">
+                <label>EMAIL: </label>
+                <input type="email" name="user_email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>PASSWORD: </label>
+                <input type="password" name="user_password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-dark float-right">SIGN IN</button>
+            </div>
+        </form>
     </div>
-    <form th:action="@{'/auth'}" method="post">
-        <div class="form-group">
-            <label>EMAIL: </label>
-            <input type="email" name="user_email" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label>PASSWORD: </label>
-            <input type="password" name="user_password" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-success float-right">SIGN IN</button>
-        </div>
-    </form>
+        <div class="col">
+    <div class="col-xsp-12 col-md-6 col-lg-4 col-lg-push-1 col-xlg-push-0 col-xlg-5">
+        <h3>New User</h3>
+        <p>When you create an account, you will profit from a number of advantages!</p>
+        <ul class="list-unstyled list-icon register-advantages">
+            <li class="vertical-middle-container"><i class="icon icon-check green"></i><span>Simply and comfortably manage your account and orders</span>
+            </li>
+            <li class="vertical-middle-container"><i class="icon icon-check green"></i><span>Recieve exclusive offers and information</span>
+            </li>
+            <li class="vertical-middle-container"><i class="icon icon-check green"></i><span>Create personal wish list and send to a friend</span>
+            </li>
+            <li class="vertical-middle-container"><i class="icon icon-check green"></i><span>Order overview and tracking at a glance</span>
+            </li>
+        </ul>
+        <a class="btn btn-dark btn-lg w100p-lg margb10 js-add-redirecturl wrap" th:href="@{'/register'}"
+           data-id="data-link-add-account">Register for free now<i class="icon icon-caret-right"></i>
+        </a></div>
+    </div>
 </div>
-
+</div>
 </body>
 </html>

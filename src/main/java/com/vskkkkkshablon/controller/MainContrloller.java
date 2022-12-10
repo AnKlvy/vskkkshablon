@@ -5,8 +5,12 @@ import com.vskkkkkshablon.entities.Products;
 import com.vskkkkkshablon.entities.Users;
 import com.vskkkkkshablon.service.ProductService;
 import com.vskkkkkshablon.service.UserService;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MainContrloller {
@@ -25,6 +30,15 @@ public class MainContrloller {
 
   @Autowired
   private UserService userService;
+
+  @Value("${file.avatar.viewPath}")
+  private String viewPath;
+
+  @Value("${file.avatar.uploadPath}")
+  private String uploadPath;
+
+  @Value("${file.avatar.defaultPicture}")
+  private String defaultPicture;
 
   /**
    * Gets products and categories lists.
@@ -110,11 +124,11 @@ public class MainContrloller {
   /**
    * Save updated item.
    *
-   * @param categories request param
-   * @param id request param
-   * @param name request param
-   * @param price request param
-   * @param amount request param
+   * @param categories  request param
+   * @param id          request param
+   * @param name        request param
+   * @param price       request param
+   * @param amount      request param
    * @param description request param
    * @return home page
    */
@@ -167,10 +181,10 @@ public class MainContrloller {
   /**
    * Add item method.
    *
-   * @param categories request param
-   * @param name request param
-   * @param price request param
-   * @param amount request param
+   * @param categories  request param
+   * @param name        request param
+   * @param price       request param
+   * @param amount      request param
    * @param description request param
    * @return home page
    */
@@ -256,12 +270,11 @@ public class MainContrloller {
    * Register method uses userService method
    * createUser() and check whether there is a user or not.
    *
-   * @param name request param
-   * @param email request param
-   * @param password request param
+   * @param name       request param
+   * @param email      request param
+   * @param password   request param
    * @param rePassword request param
    * @return register page with success message if everythink ok
-   *
    */
   @PostMapping(value = "/register")
   public String toRegister(@RequestParam(name = "user_full_name") String name,
@@ -287,13 +300,27 @@ public class MainContrloller {
    *
    * @param model for user data
    * @return page
-   *
    */
   @GetMapping("/profile")
   @PreAuthorize("isAuthenticated()")
   public String profile(Model model) {
     model.addAttribute("currentUser", getUserData());
     return "profile";
+  }
+
+  @PostMapping("/uploadavatar")
+  @PreAuthorize("isAuthenticated()")
+  public String uploadAvatar(@RequestParam(name = "user_avatar") MultipartFile file) {
+
+    try {
+      byte[] bytes = file.getBytes();
+      Path path = Paths.get(uploadPath + "pic.jpg");
+      Files.write(path, bytes);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return "redirect:/profile";
   }
 
   /**
@@ -304,7 +331,6 @@ public class MainContrloller {
    * This method is needed for get data of user for all pages.
    *
    * @return user data
-   *
    */
   private Users getUserData() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

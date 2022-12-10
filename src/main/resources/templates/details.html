@@ -38,7 +38,8 @@
                     <label>CATEGORIES : </label>
                     <div class="form-check" th:each="cat : ${categories2}">
                         <input class="form-check-input" type="checkbox" id="flexCheckDefault"
-                               th:value="${cat.getId()}" name="category_id"  ><!--th:checked="${item!=null&&item.categories!=null&&item.categories.id==cat.id}"-->
+                               th:value="${cat.getId()}" name="category_id" th:with="var=${item.categories}">
+                        <!--th:checked="${item!=null&&item.categories!=null&&item.categories.id==cat.id}"-->
                         <label class="form-check-label" for="flexCheckDefault"
                                th:text="${cat.getName()}">
                         </label>
